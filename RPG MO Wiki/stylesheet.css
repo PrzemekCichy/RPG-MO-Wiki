@@ -1,0 +1,65 @@
+﻿/*table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd)	{
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+*/
+table{
+    max-width: 100%;
+}
+canvas{
+  position:absolute;
+  top: 10px;
+  left: 0;
+  overflow:hidden;
+}
+
+.image{
+    background-repeat:no-repeat;    
+    max-width: 32px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+#Maps{
+    position: relative;
+    max-width:1900px;
+    max-height:1080px;
+    overflow:hidden;
+    width: 1900px;
+    height:1080px;
+
+}
+
+#mapsMenu{
+    position: relative;
+
+
+}
+
+#groundTilesCanvas, #topTilesCanvas{
+        cursor:crosshair;
+}
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*overflow:hidden;*/
+}
+
+.mapBtn {
+    position:relative;
+    float: left;
+}
+
+#MapsMenu{
+     cursor: pointer;
+}

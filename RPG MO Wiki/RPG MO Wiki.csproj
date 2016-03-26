@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{2EE98200-2F57-4AAE-A02C-1C156E5FC82A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="controllers\controller.js" />
+    <Content Include="DataExtract.js" />
+    <Content Include="images\alchemyitems2.gif" />
+    <Content Include="images\animals.gif" />
+    <Content Include="images\boss.gif" />
+    <Content Include="images\boss2.gif" />
+    <Content Include="images\boss3.gif" />
+    <Content Include="images\boss4.gif" />
+    <Content Include="images\capes.gif" />
+    <Content Include="images\dgmisc2.gif" />
+    <Content Include="images\dgmisc3.gif" />
+    <Content Include="images\dgmisc32.gif" />
+    <Content Include="images\dgmisc4.gif" />
+    <Content Include="images\dgmisc5.gif" />
+    <Content Include="images\dgweapon2.gif" />
+    <Content Include="images\dgweapon32.gif" />
+    <Content Include="images\dg_armor2.gif" />
+    <Content Include="images\dg_armor32.gif" />
+    <Content Include="images\dg_dragon32.gif" />
+    <Content Include="images\dg_food32.gif" />
+    <Content Include="images\dg_jewls32.gif" />
+    <Content Include="images\dg_monster532.gif" />
+    <Content Include="images\dg_uniques32.gif" />
+    <Content Include="images\fish_new32.gif" />
+    <Content Include="images\halloween.gif" />
+    <Content Include="images\house_inv.gif" />
+    <Content Include="images\mspell.gif" />
+    <Content Include="images\mweapons.gif" />
+    <Content Include="images\new\animals.gif" />
+    <Content Include="images\new\big_stuff.gif" />
+    <Content Include="images\new\boss.gif" />
+    <Content Include="images\new\boss2.gif" />
+    <Content Include="images\new\boss3.gif" />
+    <Content Include="images\new\boss4.gif" />
+    <Content Include="images\new\cathedral.gif" />
+    <Content Include="images\new\dgiso32_anvil.gif" />
+    <Content Include="images\new\dgweapon2.gif" />
+    <Content Include="images\new\dg_monster332.gif" />
+    <Content Include="images\new\dg_monster532.gif" />
+    <Content Include="images\new\dg_monster732.gif" />
+    <Content Include="images\new\dg_uniques32.gif" />
+    <Content Include="images\new\fish_new32.gif" />
+    <Content Include="images\new\ground2.gif" />
+    <Content Include="images\new\halloween.gif" />
+    <Content Include="images\new\newworld2.gif" />
+    <Content Include="images\new\newworld3.gif" />
+    <Content Include="images\new\pots_crates.gif" />
+    <Content Include="images\pets.gif" />
+    <Content Include="images\tools.gif" />
+    <Content Include="JavaScript.js" />
+    <Content Include="map0.js" />
+    <Content Include="ng-table.min.js" />
+    <Content Include="stylesheet.css" />
+    <Content Include="views\maps.html" />
+    <Content Include="views\wiki.html" />
+    <Content Include="web.config" />
+    <Content Include="index.html" />
+    <Content Include="wiki.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="controllers\controller.js.map" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="directives\" />
+    <Folder Include="wiki\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="controllers\controller.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>RPG_MO_Wiki</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50235</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50235/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>

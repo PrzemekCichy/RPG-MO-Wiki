@@ -1,0 +1,24 @@
+﻿<div id="mapsMenu" class="panel panel-success" ng-controller="MapsCtrl">
+    <button ng-controller="ScrollController" class="btn btn-success" ng-click="gotoWiki()">Jump to Wiki</button>
+    <div id="scrollArea" ng-repeat="map  in mapNames">
+        <button class="btn btn-info mapBtn" ng-click="render(map.id)">{{map.name}}</button>
+    </div>
+</div>
+
+<div id="Maps">
+    <canvas id="groundTilesCanvas" width="5400" height="3000"></canvas>
+    <canvas id="topTilesCanvas" width="5400" height="3000"></canvas>
+</div>
+<!--
+<table>
+    <tr ng-repeat="item in items">
+        <td class="image" ng-style=" getBackgroundStyle(item.img.sheet, item.img.x, item.img.y) "></td>
+        <td>{{item.name | uppercase}}</td>
+        <td>{{ item.params.price}}</td>
+    </tr>
+</table>
+-->
+<div id="wikiAnchor" ng-controller="ScrollController">
+    <button class="btn btn-success" ng-click="gotoMaps()">Jump to Maps</button>
+
+</div>

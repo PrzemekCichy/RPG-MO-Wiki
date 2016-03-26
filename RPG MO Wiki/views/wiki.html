@@ -1,0 +1,163 @@
+﻿<div ng-controller="ItemListCtrl">
+
+    <div id="wiki" ng-repeat="category in itemCategories">
+
+        <div class="panel-heading">{{category.name}}</div>
+        <table class="table table-sm table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th><button type="button" class="btn btn-info" ng-click="hideTable = !hideTable" ng-model="hideTable">{{hideTable === true ? "Hide" : "Show"}}</button></th>
+                    <th>Name</th>
+                    <th st-sort="price">Price</th>
+                    <th st-sort="aim">Aim</th>
+                    <th st-sort="power">Power</th>
+                    <th st-sort="armour">Armour</th>
+                    <th st-sort="magic">Magic</th>
+                </tr>
+                <tr ng-show="hideTable">
+                    <th>
+                    </th>
+                    <th>
+                        <input st-search="name" placeholder="search for firstname" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="price" placeholder="search for price" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="aim" placeholder="search for aim" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="power" placeholder="search for power" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="armour" placeholder="search for armour" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="magic" placeholder="search for magic" class="input-sm form-control" type="search" />
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody ng-show="hideTable">
+
+                <tr ng-repeat="item in category.items">
+                    <td><div class="image" ng-style="getBackgroundStyle(items[item.id].img.sheet, items[item.id].img.x, items[item.id].img.y);"></div> </td>
+                    <td>{{items[item.id].name | uppercase}}</td>
+                    <td>{{items[item.id].params.price | currency}}</td>
+                    <td>{{items[item.id].params.aim}}</td>
+                    <td>{{items[item.id].params.power}}</td>
+                    <td>{{items[item.id].params.armor}}</td>
+                    <td>{{items[item.id].params.magic}}</td>
+                    <!-- <td ng-repeat="(key, value) in items[item.id].params">{{value}}</td> -->
+                </tr>
+                tr
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+
+        <!--
+        <div class="panel-heading">Monsters</div>
+        <table class="table table-sm table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th><button type="button" class="btn btn-info" ng-click="hideMonsterTable = !hideMonsterTable" ng-model="hideMonsterTable">{{hideMonsterTable === true ? "Hide" : "Show"}}</button></th>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="level">Level</th>
+                    <th st-sort="health">Health</th>
+                    <th st-sort="accuracy">Accuracy</th>
+                    <th st-sort="strength">Strength</th>
+                    <th st-sort="defense">Defense</th>
+                    <th st-sort="meleeBlock">Melee Block</th>
+                    <th st-sort="magicBlock">Magic Block</th>
+                    <th st-sort="spell">Spell</th>
+                    <th st-sort="loot">Magic</th>
+                    <th st-sort="loot">Loot</th>
+
+                </tr>
+                <tr ng-show="hideMonsterTable">
+                    <th>
+                    </th>
+                    <th>
+                        <input st-search="name" placeholder="search for Name" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="level" placeholder="search for Level" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="health" placeholder="search for Health" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="accuracy" placeholder="search for Accuracy" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="strength" placeholder="search for Strength" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="defense" placeholder="search for Defense" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="meleeBLock" placeholder="search for Melee Block" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="magicBlock" placeholder="search for Magic Block" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="spell" placeholder="search for Spell" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="loot" placeholder="search for Loot" class="input-sm form-control" type="search" />
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody ng-show="hideMonsterTable">
+
+                <tr ng-repeat="mob in mobList">
+                    <td><div class="image" ng-style="getBackgroundStyle(mob.img.sheet, mob.img.x, mob.img.y);"></div> </td>
+                    <td>{{mob.name}}</td>
+                    <td>{{mob.params.combat_level}}</td>
+                    <td>{{mob.temp.health}}</td>
+                    <td>{{mob.temp.total_accuracy}}</td>
+                    <td>{{mob.temp.total_strength}}</td>
+                    <td>{{mob.temp.total_defense}}</td>
+                    <td>{{mob.temp.melee_block}}</td>
+                    <td>{{mob.temp.magic_block}}</td>
+                    <td>{{mob.temp.magics[0].id}}</td>
+                    <td ng-repeat="(key, value) in mob.params.drops">
+                    <div class="image" ng-style="getBackgroundStyle(items[value.id].img.sheet, items[value.id].img.x, items[value.id].img.y);"></div><div>0.35%</div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        -->
+
+
+        <div class="panel-heading">Monsters</div>
+        <table ng-table="tableParams" class="table" show-filter="true">
+            <tr ng-repeat="mob in data">
+                <td><div class="image" ng-style="getBackgroundStyle(mob.img.sheet, mob.img.x, mob.img.y);"></div> </td>
+                <td title="'Name'" filter="{ Name: 'text'}" sortable="'Name'">
+                    {{mob.name}}
+                </td>
+                <td title="'Level'" filter="{ level: 'number'}" sortable="params.combat_level">{{params.combat_level}}</td>
+                <td title="'Health'" filter="{ level: 'number'}" sortable="'level'">{{mob.temp.health}}</td>
+                <td title="'Accuracy'" filter="{ accuracy: 'number'}" sortable="'accuracy'">{{mob.temp.total_accuracy}}</td>
+                <td title="'Strenght'" filter="{ strength: 'number'}" sortable="'strength'">{{mob.temp.total_strength}}</td>
+                <td title="'Defense'" filter="{ defense: 'number'}" sortable="'defense'">{{mob.temp.total_defense}}</td>
+                <td title="'Melee Block'" filter="{ melee: 'number'}" sortable="'melee'">{{mob.temp.melee_block}}</td>
+                <td title="'Magic block'" filter="{ magic: 'number'}" sortable="'magic'">{{mob.temp.magic_block}}</td>
+                <td title="'Spell'" filter="{ spells: 'number'}" sortable="'spells'">{{mob.temp.magics[0].id}}</td>
+                <td title="'Loot'" filter="{ loot: 'number'}" sortable="'loot'" ng-repeat="(key, value) in mob.params.drops">
+                    <div class="image" ng-style="getBackgroundStyle(items[value.id].img.sheet, items[value.id].img.x, items[value.id].img.y);"></div><div>0.35%</div>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
