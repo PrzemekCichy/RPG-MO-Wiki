@@ -3,32 +3,32 @@ var on_map_json = on_map_json || [];
 var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
     .config(function ($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/wiki', {
         templateUrl: 'views/wiki.html',
-        controller: 'ItemListCtrl'
+        controller: 'ItemListController'
     })
         .when('/maps', {
         templateUrl: 'views/maps.html',
-        controller: 'MapsCtrl'
+        controller: 'MapsController'
     })
         .when('/calculators', {
-        templateUrl: 'views/contact.html',
-        controller: 'calculatorsController'
+        templateUrl: 'views/calculators.html',
+        controller: 'CalculatorsController'
     })
         .when('/market', {
-        templateUrl: 'views/maps.html',
-        controller: 'marketController'
+        templateUrl: 'views/market.html',
+        controller: 'MarketController'
     })
         .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'aboutController'
+        controller: 'AboutController'
     });
-});
-wikiAppControllers.controller('mainController', function ($scope) {
+})
+    .controller('mainController', function ($scope) {
     // create a message to display in our view
     $scope.message = 'Everyone come and see how good I look!';
 })
-    .controller('ItemListCtrl', ['$routeParams', '$scope', function ($scope, $routeParams, ngTableParams) {
+    .controller('ItemListController', ["$scope", function ($scope, $routeParams) {
         $scope.items = itemsFromString;
         $scope.itemCategories = categoriesFromString;
         $scope.mobList = baseNPCFromString;
@@ -65,9 +65,30 @@ wikiAppControllers.controller('mainController', function ($scope) {
             };
         };
         $scope.data = baseNPCFromString;
-        $scope.tableParams = new ngTableParams({}, { dataset: $scope.data });
+        //  $scope.tableParams = new ngTableParams({}, { dataset: $scope.data });
     }])
-    .controller('MapsCtrl', function ($scope) {
+    .controller('MapsController', function ($scope, $routeParams) {
+    var clicked = false, clickY, clickX;
+    ;
+    $("#Maps").on({
+        'mousemove': function (e) {
+            clicked && updateScrollPos(e);
+        },
+        'mousedown': function (e) {
+            clicked = true;
+            clickY = e.pageY;
+            clickX = e.pageX;
+        },
+        'mouseup': function () {
+            clicked = false;
+            $('#Maps').css('cursor', 'auto');
+        }
+    });
+    var updateScrollPos = function (e) {
+        $('#Maps').css('cursor', 'row-resize');
+        $('#Maps').scrollTop($('#Maps').scrollTop() + (clickY - e.pageY));
+        $('#Maps').scrollLeft($('#Maps').scrollLeft() + (clickX - e.pageX));
+    };
     $scope.mapNames = [{ "id": "0", "name": "Dorpat" }, { "id": "1", "name": "Dungeon I" }, { "id": "2", "name": "Narwa" }, { "id": "3", "name": "Whiland" }, { "id": "4", "name": "Reval" }, { "id": "5", "name": "Rakblood" }, { "id": "6", "name": "Blood River" }, { "id": "7", "name": "Hell" }, { "id": "8", "name": "Clouds" }, { "id": "9", "name": "Heaven" }, { "id": "10", "name": "Cesis" }, { "id": "11", "name": "Walco" }, { "id": "12", "name": "Tutorial Island" }, { "id": "13", "name": "Pernau" }, { "id": "14", "name": "Fellin" }, { "id": "15", "name": "Dragon's Lair" }, { "id": "16", "name": "No Man's Land" }, { "id": "17", "name": "Ancient Dungeon" }, { "id": "18", "name": "Lost Woods" }, { "id": "19", "name": "Minigames" }, { "id": "20", "name": "Broceliande Forest" }, { "id": "21", "name": "Devil's Triangle" }, { "id": "22", "name": "Cathedral" }, { "id": "23", "name": "Illusion Guild" }, { "id": "24", "name": "Every Man's Land" }, { "id": "25", "name": "Moche" }, { "id": "26", "name": "Wittensten" }, { "id": "27", "name": "Dungeon II" }, { "id": "28", "name": "Dungeon III" }, { "id": "29", "name": "Dungeon IV" }];
     var loadMaps = function (a) {
         var mapFile = document.createElement('script');
@@ -245,43 +266,11 @@ wikiAppControllers.controller('mainController', function ($scope) {
         */
     };
 })
-    .controller('ScrollController', ['$scope', '$location', '$anchorScroll',
-    function ($scope, $location, $anchorScroll) {
-        var clicked = false, clickY, clickX;
-        ;
-        $("#Maps").on({
-            'mousemove': function (e) {
-                clicked && updateScrollPos(e);
-            },
-            'mousedown': function (e) {
-                clicked = true;
-                clickY = e.pageY;
-                clickX = e.pageX;
-            },
-            'mouseup': function () {
-                clicked = false;
-                $('#Maps').css('cursor', 'auto');
-            }
-        });
-        var updateScrollPos = function (e) {
-            $('#Maps').css('cursor', 'row-resize');
-            $('#Maps').scrollTop($('#Maps').scrollTop() + (clickY - e.pageY));
-            $('#Maps').scrollLeft($('#Maps').scrollLeft() + (clickX - e.pageX));
-        };
-        $scope.gotoMaps = function () {
-            // set the location.hash to the id of
-            // the element you wish to scroll to.
-            $location.hash('mapsMenu');
-            // call $anchorScroll()
-            $anchorScroll();
-        };
-        $scope.gotoWiki = function () {
-            // set the location.hash to the id of
-            // the element you wish to scroll to.
-            $location.hash('wikiAnchor');
-            // call $anchorScroll()
-            $anchorScroll();
-        };
+    .controller('CalculatorsController', ['$routeParams', '$scope', function ($scope, $routeParams) {
+    }])
+    .controller('MarketController', ['$routeParams', '$scope', function ($scope, $routeParams) {
+    }])
+    .controller('AboutController', ['$routeParams', '$scope', function ($scope, $routeParams) {
     }]);
 //# sourceMappingURL=controller.js.map 
 //# sourceMappingURL=controller.js.map

@@ -72,10 +72,14 @@
     <Content Include="images\pets.gif" />
     <Content Include="images\tools.gif" />
     <Content Include="JavaScript.js" />
+    <Content Include="JavaScript1.js" />
     <Content Include="map0.js" />
     <Content Include="ng-table.min.js" />
     <Content Include="stylesheet.css" />
+    <Content Include="views\about.html" />
+    <Content Include="views\calculators.html" />
     <Content Include="views\maps.html" />
+    <Content Include="views\market.html" />
     <Content Include="views\wiki.html" />
     <Content Include="web.config" />
     <Content Include="index.html" />
@@ -96,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="controllers\controller.ts" />
+    <TypeScriptCompile Include="test.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
