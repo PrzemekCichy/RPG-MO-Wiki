@@ -22,7 +22,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="controllers\controller.js" />
     <Content Include="DataExtract.js" />
     <Content Include="images\alchemyitems2.gif" />
     <Content Include="images\animals.gif" />
@@ -72,8 +71,7 @@
     <Content Include="images\pets.gif" />
     <Content Include="images\tools.gif" />
     <Content Include="JavaScript.js" />
-    <Content Include="JavaScript1.js" />
-    <Content Include="map0.js" />
+    <Content Include="extractedData.js" />
     <Content Include="ng-table.min.js" />
     <Content Include="stylesheet.css" />
     <Content Include="views\about.html" />
@@ -86,7 +84,7 @@
     <Content Include="wiki.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="controllers\controller.js.map" />
+    <Content Include="mydata.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
