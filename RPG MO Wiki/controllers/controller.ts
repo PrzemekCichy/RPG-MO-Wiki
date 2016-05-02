@@ -14,6 +14,10 @@ declare var ItemsData;
 declare var Filters;
 declare var d3;
 
+
+///// <reference path="../../d3.js" />
+
+
 var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
 
     .config(function ($routeProvider) {
@@ -357,11 +361,176 @@ var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
         })();
     })
 
-
-
     .controller('CalculatorsController', ['$routeParams', '$scope', function ($scope, $routeParams) {
 
+        //Cluster & bubble layout
+        /*
+        var width = 800,
+            height = 600;
 
+        var canvas = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(50, 50)");
+
+        var pack = d3.layout.pack()
+            .size([width, height - 50])
+            .padding(10);
+
+        d3.json("clusterData.json", function (data) {
+            var nodes = pack.nodes(data);
+            console.log(nodes);
+
+            var node = canvas.selectAll(".node")
+                .data(nodes)
+                .enter()
+                .append("g")
+                .attr("class", "node")
+                .attr("transform", function (d) {
+                    return "translate(" + d.x + ", " + d.y + ")";
+                });
+
+            node.append("circle")
+                .attr("r", function (d) {
+                    return d.r;
+                })
+                .attr("fill", function (d) { return d.children ? "#fff" : "steelblue"; })
+                .attr("opacity", 0.25)
+                .attr("stroke", function (d) { return d.children ? "#fff" : "#ADADAD"; })
+                .attr("stroke-width", "2");
+
+            node.append("text")
+                .text(function (d) {
+                    return d.children ? "" : d.name;
+                })
+        });
+        */
+        
+
+        //Trees
+         /*
+        var canvas = d3.select("body").append("svg")
+            .attr("width", 500)
+            .attr("height", 500)
+            .append("g")
+            .attr("transform", "translate(50, 50)");
+
+        //CLuster is all nodes and at last level
+        //var tree = d3.layout.cluster()
+        var tree = d3.layout.tree()
+        .size([400, 400])
+
+        d3.json("treeData.json", function (data) {
+            var nodes = tree.nodes(data);
+            console.log(nodes);
+            var links = tree.links(nodes);
+            console.log(links);
+
+            var node = canvas.selectAll(".node")
+                .data(nodes)
+                .enter()
+                .append("g")
+                .attr("class", "node")
+                .attr("transform", function (d) {
+                    return "translate(" + d.y + "," + d.x + ")";
+                });
+
+            node.append("circle")
+                .attr("r", 5)
+                .attr("fill", "steelblue");
+
+            node.append("text")
+                .text(function (d) {
+                    return d.name;
+                });
+
+            var diagonal = d3.svg.diagonal()
+                .projection(function (d) {
+                    return [d.y, d.x]
+                });
+
+            canvas.selectAll(".link")
+                .data(links)
+                .enter()
+                .append("path")
+                .attr("class", "link")
+                .attr("fill", "none")
+                .attr("stroke", "#ADADAD")
+                .attr("d", diagonal);
+
+        })
+        */
+
+        //Tree fancy line connection
+        /*
+        var canvas = d3.select("body").append("svg")
+            .attr("width", 500)
+            .attr("height", 500);
+
+        var diagonal = d3.svg.diagonal()
+            .source({ x: 10, y: 10 })
+            .target({ x: 300, y: 300 });
+
+        canvas.append("path")
+            .attr("fill", "none")
+            .attr("stroke", "red")
+            .attr("d", diagonal);
+        */
+
+
+
+        //Creaing a donut chart
+        /*
+        var data = [10, 50, 80];
+        var r = 300;
+
+        var color = d3.scale.ordinal()
+        .range(["red", "blue", "orange"]);
+
+        var canvas = d3.select("body").append("svg")
+            .attr("width", 1500)
+            .attr("height", 1500)
+
+        var group = canvas.append("g")
+            .attr("transform", "translate(300, 300)");
+
+        var arc = d3.svg.arc()
+            //inner radius 0 is a pie chart
+            .innerRadius(r - 100)
+            .outerRadius(r);
+
+        var pie = d3.layout.pie()
+            .value(function (d) {
+                return d;
+            });
+
+        var arcs = group.selectAll(".arc")
+            .data(pie(data))
+            .enter()
+                .append("g")
+                .attr("class", "arc")
+
+        arcs.append("path")
+            .attr("d", arc)
+            .attr("fill", function (d) {
+                return color(d.data);
+            }); 
+
+        arcs.append("text")
+            .attr("transform", function (d) {
+                return "translate(" + arc.centroid(d) + ")";
+            })
+            .attr("text-anchor", "middle")
+            .attr("font-size", "2.5em")
+            .text(function (d) {
+                return d.data;
+            })
+
+        */
+
+        //Creating an arch
+        /*
         var canvas = d3.select("body").append("svg")
             .attr("width", 500)
             .attr("height", 500);
@@ -381,8 +550,9 @@ var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
 
         group.append("path")
         .attr("d", arc)
+        */
 
-        //
+        //Loading external data
         /*
         var canvas = d3.select("body").append("svg")
             .attr("width", 500)
@@ -521,6 +691,8 @@ var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
             .exit()
         .attr("fill", "blue")
         */
+
+
         //Simple barchart
         /*
         var dataArray = [20, 40, 60, 80];
