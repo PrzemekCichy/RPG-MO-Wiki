@@ -55,8 +55,8 @@ var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
     })
 
     .controller('ItemListController', ["$scope", function ($scope, $routeParams) {
-        $scope.ItemsData = new ItemsData();
-        console.log($scope.ItemsData);
+        //$scope.ItemsData = new ItemsData();
+        //console.log($scope.ItemsData);
 
         $scope.items = itemsFromString;
         $scope.itemCategories = categoriesFromString;
