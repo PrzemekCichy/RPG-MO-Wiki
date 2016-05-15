@@ -1,8 +1,9 @@
 var map_json = map_json || [];
 var on_map_json = on_map_json || [];
 ///// <reference path="../../d3.js" />
-var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
-    .config(function ($routeProvider) {
+var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable']);
+wikiAppControllers.$inject = ['$scope', '$filter'];
+wikiAppControllers.config(function ($routeProvider) {
     $routeProvider
         .when('/wiki', {
         templateUrl: 'views/wiki.html',
@@ -67,9 +68,125 @@ var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
                 'background-position': (x * -32 + 'px ' + y * -32 + 'px')
             };
         };
+        $scope.tableHeaders = [
+            //Armour
+            ["Name", "Skill", "Price", "Aim", "Power", "Armour", "Magic", "Archery", "Speed"],
+            //Mob
+            ["Name", "Level", "Health", "Aim", "Power", "Defense", "Magic", "Melee Block", "Magic Block"],
+            ["Name"],
+        ];
         $scope.data = baseNPCFromString;
         //  $scope.tableParams = new ngTableParams({}, { dataset: $scope.data });
     }])
+    .controller('ctrlRead', function ($scope, $filter) {
+    // init
+    $scope.sort = {
+        sortingOrder: 'id',
+        reverse: false
+    };
+    $scope.gap = 5;
+    $scope.filteredItems = [];
+    $scope.groupedItems = [];
+    $scope.itemsPerPage = 5;
+    $scope.pagedItems = [];
+    $scope.currentPage = 0;
+    $scope.items = baseNPCFromString;
+    var searchMatch = function (haystack, needle) {
+        if (!needle) {
+            return true;
+        }
+        return haystack.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
+    };
+    // init the filtered items
+    $scope.search = function () {
+        $scope.filteredItems = $filter('filter')($scope.items, function (item) {
+            for (var attr in item) {
+                if (searchMatch(item[attr], $scope.query))
+                    return true;
+            }
+            return false;
+        });
+        // take care of the sorting order
+        if ($scope.sort.sortingOrder !== '') {
+            $scope.filteredItems = $filter('orderBy')($scope.filteredItems, $scope.sort.sortingOrder, $scope.sort.reverse);
+        }
+        $scope.currentPage = 0;
+        // now group by pages
+        $scope.groupToPages();
+    };
+    // calculate page in place
+    $scope.groupToPages = function () {
+        $scope.pagedItems = [];
+        for (var i = 0; i < $scope.filteredItems.length; i++) {
+            if (i % $scope.itemsPerPage === 0) {
+                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [$scope.filteredItems[i]];
+            }
+            else {
+                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
+            }
+        }
+    };
+    $scope.range = function (size, start, end) {
+        var ret = [];
+        console.log(size, start, end);
+        if (size < end) {
+            end = size;
+            start = size - $scope.gap;
+        }
+        for (var i = start; i < end; i++) {
+            ret.push(i);
+        }
+        console.log(ret);
+        return ret;
+    };
+    $scope.prevPage = function () {
+        if ($scope.currentPage > 0) {
+            $scope.currentPage--;
+        }
+    };
+    $scope.nextPage = function () {
+        if ($scope.currentPage < $scope.pagedItems.length - 1) {
+            $scope.currentPage++;
+        }
+    };
+    $scope.setPage = function () {
+        $scope.currentPage = this.n;
+    };
+    // functions have been describe process the data for display
+    $scope.search();
+})
+    .directive("customSort", function () {
+    return {
+        restrict: 'A',
+        transclude: true,
+        scope: {
+            order: '=',
+            sort: '='
+        },
+        template: ' <a ng-click="sort_by(order)" style="color: #555555;">' +
+            '    <span ng-transclude></span>' +
+            '    <i ng-class="selectedCls(order)"></i>' +
+            '</a>',
+        link: function (scope) {
+            // change sorting order
+            scope.sort_by = function (newSortingOrder) {
+                var sort = scope.sort;
+                if (sort.sortingOrder == newSortingOrder) {
+                    sort.reverse = !sort.reverse;
+                }
+                sort.sortingOrder = newSortingOrder;
+            };
+            scope.selectedCls = function (column) {
+                if (column == scope.sort.sortingOrder) {
+                    return ('icon-chevron-' + ((scope.sort.reverse) ? 'down' : 'up'));
+                }
+                else {
+                    return 'icon-sort';
+                }
+            };
+        } // end link
+    };
+})
     .controller('MapsController', function ($scope, $routeParams) {
     //Map container Scrolling
     (function () {
@@ -678,6 +795,21 @@ var wikiAppControllers = angular.module('wikiApp', ['ngRoute', 'ngTable'])
     .controller('MarketController', ['$routeParams', '$scope', function ($scope, $routeParams) {
     }])
     .controller('AboutController', ['$routeParams', '$scope', function ($scope, $routeParams) {
-    }]);
+    }])
+    .filter('timer', function () {
+    return function (input) {
+        if (typeof input === "number") {
+            var minutes = Math.floor(input / 60000);
+            var seconds = ((input % 60000) / 1000).toFixed(0);
+            if (input > 0) {
+                return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            }
+            else {
+                return "Up" + -minutes + ":" + (-seconds < 10 ? '0' : '') + -seconds;
+            }
+        }
+        return input;
+    };
+});
 //# sourceMappingURL=controller.js.map 
 //# sourceMappingURL=controller.js.map
